@@ -1,4 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("StorageApiContext") ?? throw new InvalidOperationException("Connection string 'StorageApiContext' not found.");
+
+builder.Services.AddDbContext<StorageApiContext>(options => options.UseSqlServer(connectionString));
 
 // Add services to the container.
 
